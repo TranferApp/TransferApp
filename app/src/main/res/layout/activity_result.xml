@@ -1,0 +1,587 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     tools:context=".ResultActivity">
+
+
+    <!--select-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
+        android:padding="0dp"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="ルート１"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:background="@color/pink_5"
+            android:id="@+id/root1" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="ルート２"
+            android:textSize="17dp"
+            android:textColor="@color/gray_3"
+            android:background="@color/white"
+            android:id="@+id/root2" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="ルート３"
+            android:textSize="17dp"
+            android:textColor="@color/gray_3"
+            android:background="@color/white"
+            android:id="@+id/root3" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="ルート４"
+            android:textSize="17dp"
+            android:textColor="@color/gray_3"
+            android:background="@color/white"
+            android:id="@+id/root4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingTop="55dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:padding="0dp"
+        android:layout_below="@+id/linearLayout"
+        android:background="@color/pink_5"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="8:18→8:38"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:id="@+id/times" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:text="(20分)"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:id="@+id/course" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:text="328円"
+            android:textSize="17dp"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:id="@+id/money" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:text="乗り換え１回"
+            android:textSize="17dp"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:id="@+id/change" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="130dp"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="0dp"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp"
+            android:weightSum="1">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:background="@color/pink_2">
+            　　<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="発"
+                android:textSize="17dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:id="@+id/leave" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="8:18"
+                    android:textSize="17dp"
+                    android:paddingTop="0dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/leaveTime" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:background="@color/white">
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:text="高田馬場駅"
+                android:textSize="17dp"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/white"
+                android:id="@+id/textSta"
+                android:layout_weight="0.05" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="50dp"
+                android:src="@drawable/elev"
+                android:gravity="left|center"
+                android:paddingBottom="5dp"
+                 />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="早稲田口"
+                        android:textSize="12dp"
+                        android:paddingTop="5dp"
+                        android:id="@+id/place1_1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="12dp"
+                        android:paddingTop="0dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--center-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="1dp"
+            android:paddingTop="5dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+                android:padding="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:text="JR山手線内回り"
+                    android:textSize="14dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/textWay_1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:text="/新宿・渋谷方面"
+                    android:textSize="14dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="0dp"
+                    android:id="@+id/textDire_1" />
+                </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+                android:padding="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:text="3駅"
+                    android:textSize="14dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/textCou_1" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+                android:padding="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:textSize="14dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="154円"
+                    android:id="@+id/textMoney_1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:padding="10dp"
+                android:background="@color/pink_2">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="着"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/arrive" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:38"
+                        android:textSize="14dp"
+                        android:paddingTop="0dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/arriveTime" />
+                    </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="発"
+                        android:textSize="14dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/leave2" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8:38"
+                        android:textSize="14dp"
+                        android:paddingTop="0dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/leaveTime2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:text="代々木駅"
+                    android:textSize="17dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/white"
+                    android:layout_weight="0.05"
+                    android:id="@+id/textSta2" />
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/elev"
+                    android:gravity="left|center"
+                    android:paddingBottom="5dp"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="西口"
+                        android:textSize="12dp"
+                        android:paddingTop="5dp"
+                        android:id="@+id/place2_1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="12dp"
+                        android:paddingTop="0dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="1dp"
+        android:paddingTop="5dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:text="都営大江戸線"
+                android:textSize="14dp"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:id="@+id/textway_2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:text="/六本木大門方面"
+                android:textSize="14dp"
+                android:gravity="left|center"
+                android:paddingLeft="0dp"
+                android:id="@+id/textDire_2" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:text="3駅"
+                android:textSize="14dp"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:id="@+id/textCou_2" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:text="174円"
+                android:textSize="14dp"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:id="@+id/textMoney_2" />
+        </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:padding="0dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:background="@color/pink_2">
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="着"
+            android:textSize="17dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/white"
+                android:id="@+id/arrive2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="8:38"
+                android:textSize="17dp"
+                android:paddingTop="0dp"
+                android:textColor="@color/white"
+                android:id="@+id/arriveTime2" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:text="六本木駅"
+                    android:textSize="17dp"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/white"
+                    android:layout_weight="0.05"
+                    android:id="@+id/textSta3" />
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/elev"
+                    android:gravity="left|center"
+                    android:paddingBottom="5dp"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="東京ミッドタウン"
+                        android:textSize="12dp"
+                        android:paddingTop="5dp"
+                        android:id="@+id/place3_1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="12dp"
+                        android:paddingTop="0dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="再検索"
+            android:background="@color/pink_5"
+            android:id="@+id/searchButton2"
+            android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
