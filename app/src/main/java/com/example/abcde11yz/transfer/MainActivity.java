@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-//test
+//Test
 public class MainActivity extends ActionBarActivity {
     private Button search_button;
     private EditText edit_text_leave;
