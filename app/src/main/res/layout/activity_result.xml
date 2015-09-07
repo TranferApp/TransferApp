@@ -64,7 +64,6 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:paddingTop="55dp"
@@ -312,7 +311,10 @@
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
                 android:layout_margin="0dp"
-                android:padding="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:background="@color/pink_2">
                 <LinearLayout
                     android:orientation="horizontal"
@@ -374,7 +376,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:background="@color/white"
-                    android:layout_weight="0.05"
                     android:id="@+id/textSta2" />
 
                 <ImageView
@@ -576,7 +577,7 @@
             android:layout_height="wrap_content"
             android:text="再検索"
             android:background="@color/pink_5"
-            android:id="@+id/searchButton2"
+            android:id="@+id/returnButton"
             android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
