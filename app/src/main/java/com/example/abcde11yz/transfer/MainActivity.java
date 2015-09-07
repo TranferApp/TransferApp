@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 
@@ -31,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         setViewObject();
         setListener();
-        setArrayBt();
+       // setArrayBt();
     }
 
     private  View.OnClickListener search_Clicklistener = new View.OnClickListener() {
@@ -40,45 +41,61 @@ public class MainActivity extends ActionBarActivity {
             }
     };
 
+    private  View.OnClickListener leave_Clicklistener = new View.OnClickListener() {
+        public void onClick(View v) {
+                    select_leave.setBackgroundColor(Color.rgb(0, 0, 0));
+                    select_arrive.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_now.setBackgroundColor(Color.rgb(127, 127, 127));
+            }
+    };
+    private  View.OnClickListener arrive_Clicklistener = new View.OnClickListener() {
+        public void onClick(View v) {
+                    select_arrive.setBackgroundColor(Color.rgb(0, 0, 0));
+                    select_leave.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_now.setBackgroundColor(Color.rgb(127, 127, 127));
+        }
+    };
+    private  View.OnClickListener now_Clicklistener = new View.OnClickListener() {
+        public void onClick(View v) {
+                    select_arrive.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_leave.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_now.setBackgroundColor(Color.rgb(0, 0, 0));
+        }
+    };
+
     private void submit_Click(View v) {
         Log.d("hellohhlo","33");
         Intent intent = new Intent(this, ResultActivity.class);
-
         startActivity(intent);
     }
 
     private void setViewObject (){
         search_button=(Button)findViewById(R.id.searchButton);
         edit_text_leave=(EditText)findViewById(R.id.leaveSta);
-
-       /* select_leave=(Button)findViewById(R.id.selectLeave);
+        select_leave=(Button)findViewById(R.id.selectLeave);
         select_arrive=(Button)findViewById(R.id.selectArrive);
-        select_now=(Button)findViewById(R.id.selectNow);*/
+        select_now=(Button)findViewById(R.id.selectNow);
     }
 
     private void setListener(){
         search_button.setOnClickListener(search_Clicklistener);
-
-     /*   select_leave.setOnClickListener(this);
-        select_arrive.setOnClickListener(this);
-        select_now.setOnClickListener(this);*/
+        select_leave.setOnClickListener(leave_Clicklistener);
+        select_arrive.setOnClickListener(arrive_Clicklistener);
+        select_now.setOnClickListener(now_Clicklistener);
     }
 
+
+
     private void setArrayBt() {
-        //kokokara
-       /* arrayList = new ArrayList<Button>();
-        arrayList.add(threadTest);
-        arrayList.add(customlistview);
+        ArrayList<Button> arrayList = new ArrayList<Button>();
+        arrayList.add(select_leave);
+        arrayList.add(select_arrive);
+        arrayList.add(select_now);
 
         Button select_arrive = arrayList.get(0);
         Button select_leave = arrayList.get(1);
         Button select_now = arrayList.get(2);
 
-        select_arrive.setBackgroundColor(Color.rgb(0, 0, 0));
-        select_leave.setBackgroundColor(Color.rgb(127, 127, 127));
-        select_now.setBackgroundColor(Color.rgb(127, 127, 127));
-        */
-//kokomade
     }
 
 

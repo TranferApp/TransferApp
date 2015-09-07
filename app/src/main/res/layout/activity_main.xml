@@ -115,7 +115,7 @@
                 android:gravity="center"
                 android:text="出発"
                 android:textSize="17dp"
-                android:textColor="@color/gray_3"
+                android:textColor="@color/white"
                 android:background="@color/white"
                 android:id="@+id/selectLeave" />
             <Button
@@ -126,7 +126,7 @@
                 android:gravity="center"
                 android:text="到着"
                 android:textSize="17dp"
-                android:textColor="@color/gray_3"
+                android:textColor="@color/white"
                 android:background="@color/white"
                 android:id="@+id/selectArrive" />
             <Button
