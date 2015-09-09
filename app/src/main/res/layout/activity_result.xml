@@ -143,7 +143,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="0dp"
                 android:gravity="center"
-                android:background="@color/pink_2">
+                android:background="@color/pink_4">
             　　<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -315,7 +315,7 @@
                 android:paddingBottom="6dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:background="@color/pink_2">
+                android:background="@color/pink_4">
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
@@ -501,7 +501,7 @@
             android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:gravity="center"
-            android:background="@color/pink_2">
+            android:background="@color/pink_4">
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

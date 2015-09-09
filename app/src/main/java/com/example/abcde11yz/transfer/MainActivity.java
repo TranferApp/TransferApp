@@ -11,11 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.sql.Time;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 
 //Test
 public class MainActivity extends ActionBarActivity {
@@ -24,6 +25,11 @@ public class MainActivity extends ActionBarActivity {
     private Button select_leave;
     private Button select_now;
     private EditText edit_text_leave;
+    private EditText year;
+    private EditText month;
+    private EditText day;
+    private EditText hour;
+    private EditText minutes;
     private ArrayList<String> arrayList ;
 
     @Override
@@ -43,23 +49,23 @@ public class MainActivity extends ActionBarActivity {
 
     private  View.OnClickListener leave_Clicklistener = new View.OnClickListener() {
         public void onClick(View v) {
-                    select_leave.setBackgroundColor(Color.rgb(0, 0, 0));
-                    select_arrive.setBackgroundColor(Color.rgb(127, 127, 127));
-                    select_now.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_leave.setBackgroundColor(Color.rgb(219, 112, 147));
+                    select_arrive.setBackgroundColor(Color.rgb(255, 182, 193));
+                    select_now.setBackgroundColor(Color.rgb(255, 182, 193));
             }
     };
     private  View.OnClickListener arrive_Clicklistener = new View.OnClickListener() {
         public void onClick(View v) {
-                    select_arrive.setBackgroundColor(Color.rgb(0, 0, 0));
-                    select_leave.setBackgroundColor(Color.rgb(127, 127, 127));
-                    select_now.setBackgroundColor(Color.rgb(127, 127, 127));
+                    select_arrive.setBackgroundColor(Color.rgb(219, 112, 147));
+                    select_leave.setBackgroundColor(Color.rgb(255, 182, 193));
+                    select_now.setBackgroundColor(Color.rgb(255, 182, 193));
         }
     };
     private  View.OnClickListener now_Clicklistener = new View.OnClickListener() {
         public void onClick(View v) {
-                    select_arrive.setBackgroundColor(Color.rgb(127, 127, 127));
-                    select_leave.setBackgroundColor(Color.rgb(127, 127, 127));
-                    select_now.setBackgroundColor(Color.rgb(0, 0, 0));
+                    select_arrive.setBackgroundColor(Color.rgb(255, 182, 193));
+                    select_leave.setBackgroundColor(Color.rgb(255, 182, 193));
+                    select_now.setBackgroundColor(Color.rgb(219, 112, 147));
         }
     };
 
@@ -98,6 +104,45 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void main(String[] args){
+        Calendar calendar = Calendar.getInstance(); //インスタンス化
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day   = calendar.get(Calendar.DAY_OF_MONTH);
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        int hour  = calendar.get(Calendar.HOUR_OF_DAY);
+        int min   = calendar.get(Calendar.MINUTE);
+        int sec   = calendar.get(Calendar.SECOND);
+        //int ms    = calendar.get(Calendar.MILLISECOND);
+        EditText yearText =(EditText)findViewById(R.id.year);
+        EditText monthText =(EditText)findViewById(R.id.month);
+        EditText dayText =(EditText)findViewById(R.id.day);
+        EditText weekText =(EditText)findViewById(R.id.date);
+        EditText hourText =(EditText)findViewById(R.id.hour);
+        EditText minText =(EditText)findViewById(R.id.minutes);
+        EditText secText =(EditText)findViewById(R.id.second);
+        yearText.setText(year);
+        monthText.setText(month);
+        dayText.setText(day);
+        weekText.setText("("+week+")");
+        hourText.setText(hour);
+        minText.setText(min);
+        secText.setText(sec);
+    }
+
+    public static String getDayOfTheWeekShort() {
+        Calendar cal = Calendar.getInstance();
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.SUNDAY: return "日";
+            case Calendar.MONDAY: return "月";
+            case Calendar.TUESDAY: return "火";
+            case Calendar.WEDNESDAY: return "水";
+            case Calendar.THURSDAY: return "木";
+            case Calendar.FRIDAY: return "金";
+            case Calendar.SATURDAY: return "土";
+        }
+        throw new IllegalStateException();
+    }
 
 
     @Override
