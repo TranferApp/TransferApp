@@ -9,10 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+
+//import test.mackiso.tabtest.R;
+
 
 
 public class ResultActivity extends ActionBarActivity {
     private Button returnButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +29,22 @@ public class ResultActivity extends ActionBarActivity {
         setContentView(R.layout.activity_result);
         setViewObject();
         setListener();
+        //ActionBarをGetしてTabModeをセット
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        actionBar.addTab(actionBar.newTab()
+                .setText("First")
+                .setTabListener(new TabListener<FirstTabFragment>(
+                        this, "tag1", FirstTabFragment.class)));
+        actionBar.addTab(actionBar.newTab()
+                .setText("Second")
+                .setTabListener(new TabListener<SecondTabFragment>(
+                        this, "tag2", SecondTabFragment.class)));
+        actionBar.addTab(actionBar.newTab()
+                .setText("Third")
+                .setTabListener(new TabListener<ThirdTabFragment>(
+                        this, "tag3", ThirdTabFragment.class)));
     }
 
     private void setViewObject (){

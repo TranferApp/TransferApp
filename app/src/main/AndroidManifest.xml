@@ -20,6 +20,26 @@
             android:name=".ResultActivity"
             android:label="@string/title_activity_result_acvtivity" >
         </activity>
+        <activity
+            android:name=".MainActivity2Activity"
+            android:label="@string/title_activity_main_activity2" >
+        </activity>
+        <activity
+            android:name=".FirstTabFragment"
+            android:label="@string/title_activity_first_tab_fragment" >
+        </activity>
+        <activity
+            android:name=".SecondTabFragment"
+            android:label="@string/title_activity_second_tab_fragment" >
+        </activity>
+        <activity
+            android:name=".ThirdTabFragment"
+            android:label="@string/title_activity_third_tab_fragment" >
+        </activity>
+        <activity
+            android:name=".TabListener"
+            android:label="@string/title_activity_tab_listener" >
+        </activity>
     </application>
 
 </manifest>

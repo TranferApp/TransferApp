@@ -1,5 +1,6 @@
 package com.example.abcde11yz.transfer;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -31,14 +32,16 @@ public class MainActivity extends ActionBarActivity {
     private EditText hour;
     private EditText minutes;
     private ArrayList<String> arrayList ;
-
+    private String args;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setViewObject();
         setListener();
-       // setArrayBt();
+        //後で   getTime();
+        // setArrayBt();
+
     }
 
     private  View.OnClickListener search_Clicklistener = new View.OnClickListener() {
@@ -104,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void main(String[] args){
+    private void getTime(){
         Calendar calendar = Calendar.getInstance(); //インスタンス化
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
