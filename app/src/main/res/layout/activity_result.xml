@@ -70,7 +70,7 @@
         android:layout_marginRight="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="50dp"
         android:padding="0dp"
         android:layout_below="@+id/linearLayout"
         android:background="@color/pink_5"
@@ -129,7 +129,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_marginRight="0dp"
             android:layout_marginLeft="0dp"
@@ -197,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="早稲田口"
+                        android:text="早稲田口aあああああああいいいいいうううううう"
                         android:textSize="12dp"
                         android:paddingTop="5dp"
                         android:id="@+id/place1_1" />

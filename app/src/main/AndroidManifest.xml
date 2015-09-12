@@ -40,6 +40,6 @@
             android:name=".TabListener"
             android:label="@string/title_activity_tab_listener" >
         </activity>
+        <uses-permission android:name="android.permission.INTERNET" />
     </application>
-
 </manifest>

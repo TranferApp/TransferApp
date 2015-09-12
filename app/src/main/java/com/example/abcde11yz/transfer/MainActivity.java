@@ -26,11 +26,13 @@ public class MainActivity extends ActionBarActivity {
     private Button select_leave;
     private Button select_now;
     private EditText edit_text_leave;
-    private EditText year;
-    private EditText month;
-    private EditText day;
-    private EditText hour;
-    private EditText minutes;
+    private EditText yearText;
+    private EditText monthText;
+    private EditText dayText;
+    private EditText dateText;
+    private EditText hourText;
+    private EditText minText;
+    private EditText secText;
     private ArrayList<String> arrayList ;
     private String args;
     @Override
@@ -39,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         setViewObject();
         setListener();
-        //後で   getTime();
+        getTime();
         // setArrayBt();
 
     }
@@ -84,6 +86,13 @@ public class MainActivity extends ActionBarActivity {
         select_leave=(Button)findViewById(R.id.selectLeave);
         select_arrive=(Button)findViewById(R.id.selectArrive);
         select_now=(Button)findViewById(R.id.selectNow);
+        yearText =(EditText)findViewById(R.id.year);
+        monthText =(EditText)findViewById(R.id.month);
+        dayText =(EditText)findViewById(R.id.day);
+        dateText =(EditText)findViewById(R.id.date);
+        hourText =(EditText)findViewById(R.id.hour);
+        minText =(EditText)findViewById(R.id.minutes);
+        secText =(EditText)findViewById(R.id.second);
     }
 
     private void setListener(){
@@ -112,29 +121,23 @@ public class MainActivity extends ActionBarActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
         int day   = calendar.get(Calendar.DAY_OF_MONTH);
-        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        String date = "";
+        date = getDayOfTheWeekShort(calendar);
+        //int week = calendar.get(Calendar.DAY_OF_WEEK);
         int hour  = calendar.get(Calendar.HOUR_OF_DAY);
         int min   = calendar.get(Calendar.MINUTE);
         int sec   = calendar.get(Calendar.SECOND);
         //int ms    = calendar.get(Calendar.MILLISECOND);
-        EditText yearText =(EditText)findViewById(R.id.year);
-        EditText monthText =(EditText)findViewById(R.id.month);
-        EditText dayText =(EditText)findViewById(R.id.day);
-        EditText weekText =(EditText)findViewById(R.id.date);
-        EditText hourText =(EditText)findViewById(R.id.hour);
-        EditText minText =(EditText)findViewById(R.id.minutes);
-        EditText secText =(EditText)findViewById(R.id.second);
-        yearText.setText(year);
-        monthText.setText(month);
-        dayText.setText(day);
-        weekText.setText("("+week+")");
-        hourText.setText(hour);
-        minText.setText(min);
-        secText.setText(sec);
+        yearText.setText(""+year);
+        monthText.setText(""+month);
+        dayText.setText(""+day);
+        dateText.setText(""+date);
+        hourText.setText(""+hour);
+        minText.setText(""+min);
+        secText.setText(""+sec);
     }
 
-    public static String getDayOfTheWeekShort() {
-        Calendar cal = Calendar.getInstance();
+    public static String getDayOfTheWeekShort(Calendar cal) {
         switch (cal.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.SUNDAY: return "日";
             case Calendar.MONDAY: return "月";
