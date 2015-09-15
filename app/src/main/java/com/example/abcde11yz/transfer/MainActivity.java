@@ -1,6 +1,7 @@
 package com.example.abcde11yz.transfer;
 
 import android.app.ActionBar;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,14 +34,18 @@ public class MainActivity extends ActionBarActivity {
     private EditText hourText;
     private EditText minText;
     private EditText secText;
-    private ArrayList<String> arrayList ;
+    private EditText leaveText;
+    private ArrayList<String> arrayList;
     private String args;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setViewObject();
         setListener();
+        //setSearchDate();
+        //deployProfileData();
         getTime();
         // setArrayBt();
 
@@ -75,12 +80,18 @@ public class MainActivity extends ActionBarActivity {
     };
 
     private void submit_Click(View v) {
-        Log.d("hellohhlo","33");
+        Log.d("hellohhlo", "33");
         Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("leaveSta",leaveText.getText().toString());
+        //ContentValues values = new ContentValues();
+        //values.put("leaveSta", leaveSta + "");
         startActivity(intent);
     }
 
+
+
     private void setViewObject (){
+        leaveText=(EditText)findViewById(R.id.leaveSta);
         search_button=(Button)findViewById(R.id.searchButton);
         edit_text_leave=(EditText)findViewById(R.id.leaveSta);
         select_leave=(Button)findViewById(R.id.selectLeave);
@@ -95,14 +106,18 @@ public class MainActivity extends ActionBarActivity {
         secText =(EditText)findViewById(R.id.second);
     }
 
+
     private void setListener(){
         search_button.setOnClickListener(search_Clicklistener);
         select_leave.setOnClickListener(leave_Clicklistener);
         select_arrive.setOnClickListener(arrive_Clicklistener);
         select_now.setOnClickListener(now_Clicklistener);
     }
-
-
+    /*
+    private void deployProfileData () {
+        leaveText.setText(leaveSta);
+    }
+*/
 
     private void setArrayBt() {
         ArrayList<Button> arrayList = new ArrayList<Button>();

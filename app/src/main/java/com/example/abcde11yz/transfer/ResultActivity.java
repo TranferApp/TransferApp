@@ -1,9 +1,12 @@
 package com.example.abcde11yz.transfer;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +38,10 @@ import java.util.ArrayList;
 public class ResultActivity extends ActionBarActivity {
     private Button returnButton;
     private TextView result_3;
-
+    private JSONObject jsonObj;
+    private TextView textSta;
+    private TextView textSta2;
+    private TextView textSta3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,22 @@ public class ResultActivity extends ActionBarActivity {
         setContentView(R.layout.activity_result);
         setViewObject();
         setListener();
-        getJson(getJSONObjectfromApi());
-
+        Intent intent = getIntent();
+        Log.v("leaveSta",intent.getStringExtra("leaveSta"));
+        set_Leave_Station_name(intent.getStringExtra("leaveSta"));
+       //getJson(getJSONObjectfromApi());
+        getJSONObjectfromApi_Take();
     }
+
 
     private void setViewObject() {
         returnButton = (Button) findViewById(R.id.returnButton);
         //edit_text_leave=(EditText)findViewById(R.id.leaveSta);
+        textSta=(TextView)findViewById(R.id.textSta);
+    }
+
+    private void set_Leave_Station_name(String leaveSta) {
+        textSta.setText(leaveSta);
     }
 
     private View.OnClickListener return_Clicklistener = new View.OnClickListener() {
@@ -67,6 +82,7 @@ public class ResultActivity extends ActionBarActivity {
     private void setListener() {
         returnButton.setOnClickListener(return_Clicklistener);
     }
+
 
     private JSONObject getJSONObjectfromApi() {
         //APのURI
@@ -92,24 +108,115 @@ public class ResultActivity extends ActionBarActivity {
         }
         return null;
     }
-
+    //えきすぱーとAPIのJSON-JSO情報から必要なエレベーター情報抜き出し
     private void getJson(JSONObject result) {
         try {
             // 各 ATND イベントのタイトルを配列へ格納
-            JSONArray resultArray = result.getJSONArray("ResultSet");
-            Log.d("------------JSON-------", resultArray.get(0).toString());
-            JSONObject informationObj = resultArray.getJSONObject(2);
-            JSONArray welfareArray = informationObj.getJSONArray("3");
-            JSONObject welfareFacilitiesObj = welfareArray.getJSONObject(2);
-            JSONArray elevatorArray = welfareFacilitiesObj.getJSONArray("1");
-            Log.d("------------JSON-------", elevatorArray.getString(1));
+            JSONObject resultObj = result.getJSONObject("ResultSet");
+           // Log.d("------------JSON-------", resultObj.get(0).toString());
+            JSONArray InformationArray = resultObj.getJSONArray("Information");
+            JSONObject ExitObj = (JSONObject)InformationArray.get(2);
+            JSONObject welfareFacilitiesObj= (JSONObject)InformationArray.get(3);
+            //JSONArray elevatorArray = welfareFacilitiesObj.getJSONArray("1");
+            //Log.d("------------JSON-------", elevatorArray.getString(1));
+            String type = welfareFacilitiesObj.getString("Type");
+            JSONArray welfareFacilitiesArray = welfareFacilitiesObj.getJSONArray("WelfareFacilities");
+
+            //countここで表示
+            int count = welfareFacilitiesArray.length();
+            for (int c = 0;c<count ;c++) {
+                JSONObject welFarrObj = (JSONObject) welfareFacilitiesArray.get(c);
+                String name = welFarrObj.getString("Name");
+                String comment = welFarrObj.getString("Comment");
+
+                Log.d("------JSON--------","name:"+name+"||comment:"+comment);
+
+
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.d("------JSON--------","データを取得できませんでした。");
+            Log.d("------JSON--------", "データを取得できませんでした。");
+        }
+    }
+    //internet接続の場合はMythreadGetListDat実行
+    private void getJSONObjectfromApi_Take () {
+        String uri = "http://api.ekispert.com/v1/json/station/info?key=Tz7zMBQarrxLSZf3&code=22828&type=rail:nearrail:exit:welfare";
+
+        if (Util.isConnectedNetwork(this) > 0) {
+            Thread threadNews = new Thread(new MythreadGetListData(uri));
+            threadNews.start();
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "ネットワークに繋がっておりません。", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER, 0, 0);
+            toast.show();
         }
     }
 
-    @Override
+    /**
+     */
+    private class MythreadGetListData implements Runnable {
+
+        private String responce_json;
+        private String url = "";
+
+        protected Handler mHandlerLatLng = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+//                v("api_responce", "::::" + (String) msg.obj + ":");
+
+
+            }
+        };
+
+        //
+        public MythreadGetListData(String url) {
+            // TODO 自動生成されたコンストラクター・スタブ
+            this.url = url;
+        }
+
+        //Httprequestと同期し、JSONの値を返す
+        public void run() {
+
+            HttpRequest hr = new HttpRequest();
+            responce_json = hr.doGet(this.url);
+
+
+            // ハンドラにメッセージを通知
+            mHandlerLatLng.sendEmptyMessage(0);
+            mHandlerLatLng.post(new Runnable() {
+
+                public void run() {
+
+                    try {
+
+                        if (responce_json != null) {
+                            jsonObj = new JSONObject(responce_json);
+
+                            getJson(jsonObj);
+
+//                            JSONObject resultsObj = addr_json.getJSONObject("Results");
+//                            JSONArray resultsArg = resultsObj.getJSONArray("Data");
+                        }
+
+                    } catch (JSONException e) {
+                        // TODO 自動生成された catch ブロック
+                        e.printStackTrace();
+
+                    }
+
+
+                }
+
+            });
+
+        }
+    }
+
+
+
+
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_result_acvtivity, menu);
