@@ -52,6 +52,7 @@ public class ResultActivity extends ActionBarActivity {
         Intent intent = getIntent();
         Log.v("leaveSta",intent.getStringExtra("leaveSta"));
         set_Leave_Station_name(intent.getStringExtra("leaveSta"));
+        set_Arrive_Station_name(intent.getStringExtra("arriveSta"));
        //getJson(getJSONObjectfromApi());
         getJSONObjectfromApi_Take();
     }
@@ -61,10 +62,14 @@ public class ResultActivity extends ActionBarActivity {
         returnButton = (Button) findViewById(R.id.returnButton);
         //edit_text_leave=(EditText)findViewById(R.id.leaveSta);
         textSta=(TextView)findViewById(R.id.textSta);
+        textSta3=(TextView)findViewById(R.id.textSta3);
     }
 
     private void set_Leave_Station_name(String leaveSta) {
         textSta.setText(leaveSta);
+    }
+    private void set_Arrive_Station_name(String arriveSta) {
+        textSta3.setText(arriveSta);
     }
 
     private View.OnClickListener return_Clicklistener = new View.OnClickListener() {

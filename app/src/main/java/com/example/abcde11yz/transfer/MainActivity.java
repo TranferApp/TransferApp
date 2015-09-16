@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
     private EditText minText;
     private EditText secText;
     private EditText leaveText;
+    private EditText arriveText;
     private ArrayList<String> arrayList;
     private String args;
 
@@ -83,6 +84,7 @@ public class MainActivity extends ActionBarActivity {
         Log.d("hellohhlo", "33");
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("leaveSta",leaveText.getText().toString());
+        intent.putExtra("arriveSta",arriveText.getText().toString());
         //ContentValues values = new ContentValues();
         //values.put("leaveSta", leaveSta + "");
         startActivity(intent);
@@ -92,8 +94,8 @@ public class MainActivity extends ActionBarActivity {
 
     private void setViewObject (){
         leaveText=(EditText)findViewById(R.id.leaveSta);
+        arriveText=(EditText)findViewById(R.id.arriveSta);
         search_button=(Button)findViewById(R.id.searchButton);
-        edit_text_leave=(EditText)findViewById(R.id.leaveSta);
         select_leave=(Button)findViewById(R.id.selectLeave);
         select_arrive=(Button)findViewById(R.id.selectArrive);
         select_now=(Button)findViewById(R.id.selectNow);
