@@ -1,6 +1,7 @@
 package com.example.abcde11yz.transfer;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
@@ -42,6 +45,8 @@ public class ResultActivity extends ActionBarActivity {
     private TextView textSta;
     private TextView textSta2;
     private TextView textSta3;
+    private TextView place1_1;
+    String leavesta = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +56,11 @@ public class ResultActivity extends ActionBarActivity {
         setListener();
         Intent intent = getIntent();
         Log.v("leaveSta",intent.getStringExtra("leaveSta"));
+        leavesta = intent.getStringExtra("leaveSta");
         set_Leave_Station_name(intent.getStringExtra("leaveSta"));
         set_Arrive_Station_name(intent.getStringExtra("arriveSta"));
        //getJson(getJSONObjectfromApi());
-        getJSONObjectfromApi_Take();
+        getJSONObjectfromApi_Take(leavesta);
     }
 
 
@@ -63,6 +69,7 @@ public class ResultActivity extends ActionBarActivity {
         //edit_text_leave=(EditText)findViewById(R.id.leaveSta);
         textSta=(TextView)findViewById(R.id.textSta);
         textSta3=(TextView)findViewById(R.id.textSta3);
+        place1_1=(TextView)findViewById(R.id.place1_1);
     }
 
     private void set_Leave_Station_name(String leaveSta) {
@@ -71,6 +78,7 @@ public class ResultActivity extends ActionBarActivity {
     private void set_Arrive_Station_name(String arriveSta) {
         textSta3.setText(arriveSta);
     }
+
 
     private View.OnClickListener return_Clicklistener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -88,11 +96,11 @@ public class ResultActivity extends ActionBarActivity {
         returnButton.setOnClickListener(return_Clicklistener);
     }
 
-
+    /*使われてない
     private JSONObject getJSONObjectfromApi() {
         //APのURI
         Log.d("-----JSON----","getJSONObjectfromApi() is called");
-        String uri = "http://api.ekispert.com/v1/json/station/info?key=Tz7zMBQarrxLSZf3&code=22828&type=rail:nearrail:exit:welfare";
+        //String uri = "http://api.ekispert.com/v1/json/station/info?key=Tz7zMBQarrxLSZf3&code=22828&type=rail:nearrail:exit:welfare";
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(uri);
         try {
@@ -113,6 +121,7 @@ public class ResultActivity extends ActionBarActivity {
         }
         return null;
     }
+    */
     //えきすぱーとAPIのJSON-JSO情報から必要なエレベーター情報抜き出し
     private void getJson(JSONObject result) {
         try {
@@ -130,13 +139,11 @@ public class ResultActivity extends ActionBarActivity {
             //countここで表示
             int count = welfareFacilitiesArray.length();
             for (int c = 0;c<count ;c++) {
-                JSONObject welFarrObj = (JSONObject) welfareFacilitiesArray.get(c);
+                JSONObject welFarrObj = (JSONObject) welfareFacilitiesArray.get(1);
                 String name = welFarrObj.getString("Name");
                 String comment = welFarrObj.getString("Comment");
-
-                Log.d("------JSON--------","name:"+name+"||comment:"+comment);
-
-
+               // Log.d("------JSON--------","name:"+name+"||comment:"+comment);
+                place1_1.setText(comment);
             }
 
         } catch (JSONException e) {
@@ -145,11 +152,62 @@ public class ResultActivity extends ActionBarActivity {
         }
     }
     //internet接続の場合はMythreadGetListDat実行
-    private void getJSONObjectfromApi_Take () {
-        String uri = "http://api.ekispert.com/v1/json/station/info?key=Tz7zMBQarrxLSZf3&code=22828&type=rail:nearrail:exit:welfare";
+    private void getJSONObjectfromApi_Take (String station_name) {
+        byte[] strByte = new byte[0];
+        String station_name_utf8 = "";
+        try {
+            strByte = station_name.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            station_name_utf8 = new String(strByte, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Uri.Builder uri = new Uri.Builder();
+        uri.scheme("http");
+        uri.authority("api.ekispert.com");
+        uri.path("v1/json/station/");
+        uri.appendQueryParameter("key", "Tz7zMBQarrxLSZf3");
+        uri.appendQueryParameter("type", "rail:nearrail:exit:welfare");
+        uri.appendQueryParameter("name",station_name_utf8);
+//        uri.appendQueryParameter("code","23799");
 
         if (Util.isConnectedNetwork(this) > 0) {
-            Thread threadNews = new Thread(new MythreadGetListData(uri));
+            Log.v("URI------------------", "::::" + uri.toString() + ":");
+            Thread threadNews = new Thread(new MythreadGetListData(uri.toString()));
+            threadNews.start();
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "ネットワークに繋がっておりません。", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+    }
+
+    private void getStationCodefromApi (String station_name) {
+        byte[] strByte = new byte[0];
+        String station_name_utf8 = "";
+        try {
+            strByte = station_name.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            station_name_utf8 = new String(strByte, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Uri.Builder uri = new Uri.Builder();
+        uri.scheme("http");
+        uri.authority("api.ekispert.com");
+        uri.path("v1/json/station");
+        uri.appendQueryParameter("key", "Tz7zMBQarrxLSZf3");
+        uri.appendQueryParameter("name",station_name_utf8);
+
+        if (Util.isConnectedNetwork(this) > 0) {
+            Log.v("URI------------------", "::::" + uri.toString() + ":");
+            Thread threadNews = new Thread(new MythreadGetListData(uri.toString()));
             threadNews.start();
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "ネットワークに繋がっておりません。", Toast.LENGTH_LONG);
