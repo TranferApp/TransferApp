@@ -60,7 +60,13 @@ public class ResultActivity extends ActionBarActivity {
         set_Leave_Station_name(intent.getStringExtra("leaveSta"));
         set_Arrive_Station_name(intent.getStringExtra("arriveSta"));
        //getJson(getJSONObjectfromApi());
-        getJSONObjectfromApi_Take(leavesta);
+       //getJSONObjectfromApi_Take(leavesta);
+       /*
+       //　合計で2回APにアクセスする。
+       // 1.検索画面で入力した駅名から、APIアクセスして、駅コードを取得する。
+       // 2.取得した駅コードを使って、再度別のAPIアクセスしエレベーター情報を取得し、TextVieにSetする。
+       */
+        getStationCodefromApi_and_set_elev_info(leavesta);
     }
 
 
@@ -122,6 +128,7 @@ public class ResultActivity extends ActionBarActivity {
         return null;
     }
     */
+
     //えきすぱーとAPIのJSON-JSO情報から必要なエレベーター情報抜き出し
     private void getJson(JSONObject result) {
         try {
@@ -146,33 +153,41 @@ public class ResultActivity extends ActionBarActivity {
                 place1_1.setText(comment);
             }
 
+
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d("------JSON--------", "データを取得できませんでした。");
         }
     }
-    //internet接続の場合はMythreadGetListDat実行
-    private void getJSONObjectfromApi_Take (String station_name) {
-        byte[] strByte = new byte[0];
-        String station_name_utf8 = "";
+
+    private void getJson_station_code(JSONObject jsonObj) {
         try {
-            strByte = station_name.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
+            // 各 ATND イベントのタイトルを配列へ格納
+            JSONObject resultObj = jsonObj.getJSONObject("ResultSet");
+            // Log.d("------------JSON-------", resultObj.get(0).toString());
+            JSONObject PointObj = resultObj.getJSONObject("Point");
+            JSONObject StationObj = (JSONObject)PointObj.getJSONObject("Station");
+            //JSONObject welfareFacilitiesObj= (JSONObject)InformationArray.get(3);
+            //JSONArray elevatorArray = welfareFacilitiesObj.getJSONArray("1");
+            //Log.d("------------JSON-------", elevatorArray.getString(1));
+            int station_code = StationObj.getInt("code");
+            getJSONObjectfromApi_Take(station_code);
+        } catch (JSONException e) {
             e.printStackTrace();
+            Log.d("------JSON--------", "データを取得できませんでした。");
         }
-        try {
-            station_name_utf8 = new String(strByte, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    }
+
+    //internet接続の場合はMythreadGetListDate実行
+    private void getJSONObjectfromApi_Take (int station_code) {
         Uri.Builder uri = new Uri.Builder();
         uri.scheme("http");
         uri.authority("api.ekispert.com");
-        uri.path("v1/json/station/");
+        uri.path("v1/json/station/info");
         uri.appendQueryParameter("key", "Tz7zMBQarrxLSZf3");
         uri.appendQueryParameter("type", "rail:nearrail:exit:welfare");
-        uri.appendQueryParameter("name",station_name_utf8);
-//        uri.appendQueryParameter("code","23799");
+        //uri.appendQueryParameter("name",station_name_utf8);
+        uri.appendQueryParameter("code",""+station_code);
 
         if (Util.isConnectedNetwork(this) > 0) {
             Log.v("URI------------------", "::::" + uri.toString() + ":");
@@ -185,7 +200,7 @@ public class ResultActivity extends ActionBarActivity {
         }
     }
 
-    private void getStationCodefromApi (String station_name) {
+    private void getStationCodefromApi_and_set_elev_info (String station_name) {
         byte[] strByte = new byte[0];
         String station_name_utf8 = "";
         try {
@@ -203,11 +218,11 @@ public class ResultActivity extends ActionBarActivity {
         uri.authority("api.ekispert.com");
         uri.path("v1/json/station");
         uri.appendQueryParameter("key", "Tz7zMBQarrxLSZf3");
-        uri.appendQueryParameter("name",station_name_utf8);
+        uri.appendQueryParameter("oldName",station_name_utf8);
 
         if (Util.isConnectedNetwork(this) > 0) {
             Log.v("URI------------------", "::::" + uri.toString() + ":");
-            Thread threadNews = new Thread(new MythreadGetListData(uri.toString()));
+            Thread threadNews = new Thread(new MythreadGetListData_for_station_code(uri.toString()));
             threadNews.start();
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "ネットワークに繋がっておりません。", Toast.LENGTH_LONG);
@@ -276,10 +291,69 @@ public class ResultActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     */
+    private class MythreadGetListData_for_station_code implements Runnable {
+
+        private String responce_json;
+        private String url = "";
+
+        protected Handler mHandlerLatLng = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+//                v("api_responce", "::::" + (String) msg.obj + ":");
+
+
+            }
+        };
+
+        //
+        public MythreadGetListData_for_station_code(String url) {
+            // TODO 自動生成されたコンストラクター・スタブ
+            this.url = url;
+        }
+
+        //Httprequestと同期し、JSONの値を返す
+        public void run() {
+
+            HttpRequest hr = new HttpRequest();
+            responce_json = hr.doGet(this.url);
+
+
+            // ハンドラにメッセージを通知
+            mHandlerLatLng.sendEmptyMessage(0);
+            mHandlerLatLng.post(new Runnable() {
+
+                public void run() {
+
+                    try {
+
+                        if (responce_json != null) {
+                            jsonObj = new JSONObject(responce_json);
+
+                            getJson_station_code(jsonObj);
+
+//                            JSONObject resultsObj = addr_json.getJSONObject("Results");
+//                            JSONArray resultsArg = resultsObj.getJSONArray("Data");
+                        }
+
+                    } catch (JSONException e) {
+                        // TODO 自動生成された catch ブロック
+                        e.printStackTrace();
+
+                    }
+
+
+                }
+
+            });
+
+        }
+    }
 
 
 
-        @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_result_acvtivity, menu);

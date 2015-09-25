@@ -49,7 +49,6 @@ public class MainActivity extends ActionBarActivity {
         //deployProfileData();
         getTime();
         // setArrayBt();
-
     }
 
     private  View.OnClickListener search_Clicklistener = new View.OnClickListener() {
@@ -72,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
                     select_now.setBackgroundColor(Color.rgb(255, 182, 193));
         }
     };
+
     private  View.OnClickListener now_Clicklistener = new View.OnClickListener() {
         public void onClick(View v) {
                     select_arrive.setBackgroundColor(Color.rgb(255, 182, 193));

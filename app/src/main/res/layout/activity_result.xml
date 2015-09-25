@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
      tools:context=".ResultActivity">
 
@@ -74,7 +75,8 @@
         android:padding="0dp"
         android:layout_below="@+id/linearLayout"
         android:background="@color/pink_5"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -116,15 +118,15 @@
 
 
     <LinearLayout
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingTop="130dp"
+
+        android:paddingTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="0dp"
-        >
+        android:id="@+id/main"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/linearLayout2">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -132,26 +134,29 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:weightSum="1">
+
+
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:background="@color/pink_4">
             　　<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="発"
-                android:gravity="center"
-                android:textSize="15dp"
+                android:textSize="17dp"
                 android:paddingLeft="5dp"
                 android:textColor="@color/white"
                 android:id="@+id/leave" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="8:18"
                     android:gravity="center"
-                    android:textSize="15dp"
+                    android:textSize="17dp"
                     android:paddingLeft="5dp"
                     android:textColor="@color/white"
                     android:id="@+id/leaveTime" />
@@ -282,7 +287,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
@@ -290,23 +295,24 @@
                 android:paddingLeft="10dp"
                 android:background="@color/pink_4">
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/pink_4">
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="着"
-                    android:textSize="14dp"
+                    android:gravity="center"
+                    android:textSize="15dp"
                     android:textColor="@color/white"
                     android:id="@+id/arrive" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8:38"
-                        android:textSize="14dp"
-                        android:paddingTop="0dp"
+                        android:textSize="15dp"
+                        android:paddingLeft="5dp"
                         android:textColor="@color/white"
                         android:id="@+id/arriveTime" />
                     </LinearLayout>
@@ -321,7 +327,6 @@
                         android:text="発"
                         android:gravity="center"
                         android:textSize="15dp"
-                        android:paddingLeft="5dp"
                         android:textColor="@color/white"
                         android:id="@+id/leave2" />
                     <TextView
@@ -376,7 +381,7 @@
             </LinearLayout>
         </LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -453,7 +458,7 @@
         </LinearLayout>
         </LinearLayout>
 
-    <LinearLayout
+       <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -487,6 +492,8 @@
                 android:textColor="@color/white"
                 android:id="@+id/arriveTime2" />
         </LinearLayout>
+
+
 
             <LinearLayout
                 android:orientation="horizontal"
